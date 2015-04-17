@@ -13,6 +13,9 @@ and the license text* when you distribute apps based on this code.
 
 To install and use the pebble SDK, please follow the instructions at [developer.getpebble.com](http://developer.getpebble.com).
 
+To just get a ready-to use pebble app, just grab it on the [Pebble App Store](https://apps.getpebble.com/applications/5530e1e17add4311280000c3).
+
+
 Version History:
 ----------------
 1.0 : April 2015: initial version for SDK 2.9 and 3.0
