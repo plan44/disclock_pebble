@@ -1,0 +1,27 @@
+{
+  "uuid": "DC6DF3D0-51C8-47EA-8275-53116578836B",
+  "shortName": "disclock",
+  "longName": "Discordian Clock",
+  "companyName": "plan44.ch",
+  "versionCode": 1,
+  "versionLabel": "1.0",
+  "watchapp": {
+    "watchface": true
+  },
+  "appKeys": {},
+  "resources": {
+    "media": [
+      {
+        "menuIcon": true,
+        "type": "png",
+        "name": "IMAGE_MENU_ICON",
+        "file": "images/menu_icon_disclock_watch.png"
+      }
+    ]
+  },
+  "targetPlatforms": [
+    "aplite",
+    "basalt"
+  ],
+  "sdkVersion": "3"
+}
