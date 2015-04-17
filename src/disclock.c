@@ -55,7 +55,7 @@ const char *toweldayText = "Towel Day";
 #define HOUR_DIAMETER 108
 #define SECOND_DIAMETER 59
 
-#if PBL_COLOR
+#ifdef PBL_COLOR
 // Colors
 // - colored weekday background
 #define DEFAULT_BG_COLOR GColorBlack
@@ -182,8 +182,8 @@ void hour_minute_layer_callback(struct Layer *layer, GContext *ctx)
   gpath_draw_filled(ctx, hourPentagon);
   graphics_context_set_fill_color(ctx, HOUR_T_COLOR);
   gpath_draw_filled(ctx, hourTriangle);
-  #ifdef PBL_BW
-  // - need outline of hour pentagon in minute pentagon color to visually separate from minute triangle
+  #ifndef PBL_COLOR
+  // - b&w: need outline of hour pentagon in minute pentagon color to visually separate from minute triangle
   graphics_context_set_stroke_color(ctx, MINUTE_P_COLOR);
   gpath_draw_outline(ctx, hourPentagon);
   #endif
@@ -195,8 +195,8 @@ void second_layer_callback(struct Layer *layer, GContext *ctx)
   gpath_rotate_to(secondPentagon, currentSecHexAngle);
   graphics_context_set_fill_color(ctx, SECOND_P_COLOR);
   gpath_draw_filled(ctx, secondPentagon);
-  #ifdef PBL_BW
-  // - need outline of second pentagon in hour pentagon color to visually separate from hour triangle
+  #ifndef PBL_COLOR
+  // - b&w: need outline of second pentagon in hour pentagon color to visually separate from hour triangle
   graphics_context_set_stroke_color(ctx, HOUR_P_COLOR);
   gpath_draw_outline(ctx, secondPentagon);
   #endif
