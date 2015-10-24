@@ -22,7 +22,11 @@ const char * const seasonTexts[5] = {
   "Discord",
   "Confusion",
   "Bureaucracy",
+  #ifdef PBL_ROUND
+  "Aftermath"
+  #else
   "the Aftermath"
+  #endif
 };
 
 // holydays
@@ -44,9 +48,14 @@ const char *sttibsdayText = "St. Tib's Day";
 const char *toweldayText = "Towel Day";
 
 // Geometry constants
+#ifdef PBL_ROUND
+#define WEEKDAY_TOP_MARGIN 8
+#define DATE_BOTTOM_MARGIN 12
+#else
 #define WEEKDAY_TOP_MARGIN -5
-#define WEEKDAY_HEIGHT 20
 #define DATE_BOTTOM_MARGIN 0
+#endif
+#define WEEKDAY_HEIGHT 20
 #define DATE_HEIGHT 20
 #define YOLD_OFFSET -2
 #define YOLD_WIDTH  38
@@ -61,7 +70,7 @@ const char *toweldayText = "Towel Day";
 #define DEFAULT_BG_COLOR GColorBlack
 #define SWEETMORN_BG_COLOR GColorBrilliantRose
 #define BOOMTIME_BG_COLOR GColorRed
-#define PUNGENDAY_BG_COLOR GColorSpringBud
+#define PUNGENDAY_BG_COLOR GColorIslamicGreen
 #define PRICKLEPRICKLE_BG_COLOR GColorVividCerulean
 #define SETTINGORANGE_BG_COLOR GColorOrange
 #define STTIBSDAY_BG_COLOR GColorFashionMagenta

@@ -4,7 +4,7 @@
   "longName": "Discordian Clock",
   "companyName": "plan44.ch",
   "versionCode": 1,
-  "versionLabel": "1.1",
+  "versionLabel": "1.2",
   "watchapp": {
     "watchface": true
   },
@@ -21,7 +21,8 @@
   },
   "targetPlatforms": [
     "aplite",
-    "basalt"
+    "basalt",
+    "chalk"
   ],
   "sdkVersion": "3"
 }
