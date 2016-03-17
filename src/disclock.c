@@ -64,36 +64,119 @@ const char *toweldayText = "Towel Day";
 #define HOUR_DIAMETER 108
 #define SECOND_DIAMETER 59
 
+
+typedef struct {
+  GColor8 main_color;
+  GColor8 dwday_text_color;
+  GColor8 minute_p_color;
+  GColor8 minute_t_color;
+  GColor8 hour_p_color;
+  GColor8 hour_t_color;
+  GColor8 second_p_color;
+  GColor8 second_text_color;
+  GColor8 ddate_text_color;
+} TDayPalette;
+
+
 #ifdef PBL_COLOR
-// Colors
-// - colored weekday background
-#define DEFAULT_BG_COLOR GColorBlack
-#define SWEETMORN_BG_COLOR GColorBrilliantRose
-#define BOOMTIME_BG_COLOR GColorRed
-#define PUNGENDAY_BG_COLOR GColorIslamicGreen
-#define PRICKLEPRICKLE_BG_COLOR GColorVividCerulean
-#define SETTINGORANGE_BG_COLOR GColorOrange
-#define STTIBSDAY_BG_COLOR GColorFashionMagenta
-// - elements
-#define DWDAY_TEXT_COLOR GColorWhite
-#define MINUTE_P_COLOR GColorWhite
-#define MINUTE_T_COLOR GColorBlack
-#define HOUR_P_COLOR GColorDukeBlue
-#define HOUR_T_COLOR GColorElectricBlue
-#define SECOND_P_COLOR GColorChromeYellow
-#define SECOND_TEXT_COLOR GColorBlack
-#define DDATE_TEXT_COLOR GColorWhite
+// Colored
+
+#define NUM_PALETTES (5+1) // standard days + St.Tib's
+static TDayPalette dayPalettes[NUM_PALETTES] = {
+  {
+    // Sweetmorn
+    .main_color.argb = GColorDukeBlueARGB8,
+    .dwday_text_color.argb = GColorCyanARGB8,
+    .minute_p_color.argb = GColorBabyBlueEyesARGB8,
+    .minute_t_color.argb = GColorJazzberryJamARGB8,
+    .hour_p_color.argb = GColorFashionMagentaARGB8,
+    .hour_t_color.argb = GColorImperialPurpleARGB8,
+    .second_p_color.argb = GColorRedARGB8,
+    .second_text_color.argb = GColorRichBrilliantLavenderARGB8,
+    .ddate_text_color.argb = GColorCyanARGB8
+  },
+  {
+    // boomtime
+    .main_color.argb = GColorDarkCandyAppleRedARGB8,
+    .dwday_text_color.argb = GColorWhiteARGB8,
+    .minute_p_color.argb = GColorRedARGB8,
+    .minute_t_color.argb = GColorBulgarianRoseARGB8,
+    .hour_p_color.argb = GColorOrangeARGB8,
+    .hour_t_color.argb = GColorYellowARGB8,
+    .second_p_color.argb = GColorPastelYellowARGB8,
+    .second_text_color.argb = GColorBlackARGB8,
+    .ddate_text_color.argb = GColorWhiteARGB8
+  },
+  {
+    // pungenday
+    .main_color.argb = GColorScreaminGreenARGB8,
+    .dwday_text_color.argb = GColorArmyGreenARGB8,
+    .minute_p_color.argb = GColorIcterineARGB8,
+    .minute_t_color.argb = GColorMidnightGreenARGB8,
+    .hour_p_color.argb = GColorSpringBudARGB8,
+    .hour_t_color.argb = GColorLimerickARGB8,
+    .second_p_color.argb = GColorDarkGreenARGB8,
+    .second_text_color.argb = GColorWhiteARGB8,
+    .ddate_text_color.argb = GColorArmyGreenARGB8
+  },
+  {
+    // prickle-prickle
+    .main_color.argb = GColorIndigoARGB8,
+    .dwday_text_color.argb = GColorFollyARGB8,
+    .minute_p_color.argb = GColorRichBrilliantLavenderARGB8,
+    .minute_t_color.argb = GColorBlueARGB8,
+    .hour_p_color.argb = GColorCobaltBlueARGB8,
+    .hour_t_color.argb = GColorElectricBlueARGB8,
+    .second_p_color.argb = GColorVividCeruleanARGB8,
+    .second_text_color.argb = GColorDukeBlueARGB8,
+    .ddate_text_color.argb = GColorFollyARGB8
+  },
+  {
+    // setting orange
+    .main_color.argb = GColorChromeYellowARGB8,
+    .dwday_text_color.argb = GColorRedARGB8,
+    .minute_p_color.argb = GColorOrangeARGB8,
+    .minute_t_color.argb = GColorBlackARGB8,
+    .hour_p_color.argb = GColorWindsorTanARGB8,
+    .hour_t_color.argb = GColorYellowARGB8,
+    .second_p_color.argb = GColorOrangeARGB8,
+    .second_text_color.argb = GColorYellowARGB8,
+    .ddate_text_color.argb = GColorRedARGB8
+  },
+  {
+    // St.Tib's day
+    .main_color.argb = GColorMidnightGreenARGB8,
+    .dwday_text_color.argb = GColorWhiteARGB8,
+    .minute_p_color.argb = GColorSpringBudARGB8,
+    .minute_t_color.argb = GColorArmyGreenARGB8,
+    .hour_p_color.argb = GColorChromeYellowARGB8,
+    .hour_t_color.argb = GColorRedARGB8,
+    .second_p_color.argb = GColorJazzberryJamARGB8,
+    .second_text_color.argb = GColorWhiteARGB8,
+    .ddate_text_color.argb = GColorWhiteARGB8
+  },
+};
+
+#define COLOR(day,use) (dayPalettes[day].use)
+// #define COLOR(day,use) (dayPalettes[5].use) // test colors
+
 #else
-// Monochrome
-#define DEFAULT_BG_COLOR GColorBlack
-#define DWDAY_TEXT_COLOR GColorWhite
-#define MINUTE_P_COLOR GColorWhite
-#define MINUTE_T_COLOR GColorBlack
-#define HOUR_P_COLOR GColorBlack
-#define HOUR_T_COLOR GColorWhite
-#define SECOND_P_COLOR GColorWhite
-#define SECOND_TEXT_COLOR GColorBlack
-#define DDATE_TEXT_COLOR GColorWhite
+
+static TDayPalette monoPalette = {
+  // Sweetmorn
+  .main_color.argb = GColorBlackARGB8,
+  .dwday_text_color.argb = GColorWhiteARGB8,
+  .minute_p_color.argb = GColorWhiteARGB8,
+  .minute_t_color.argb = GColorBlackARGB8,
+  .hour_p_color.argb = GColorBlackARGB8,
+  .hour_t_color.argb = GColorWhiteARGB8,
+  .second_p_color.argb = GColorWhiteARGB8,
+  .second_text_color.argb = GColorBlackARGB8,
+  .ddate_text_color.argb = GColorWhiteARGB8
+};
+
+#define COLOR(day,use) (monoPalette.use)
+
 #endif
 
 // Variables
@@ -127,10 +210,6 @@ GPath *hourTriangle = NULL;
 GPoint hourTrianglePoints[3];
 GPath *secondPentagon = NULL;
 GPoint secondPentagonPoints[5];
-// colors
-#ifdef PBL_COLOR
-GColor8 dweekdayColors[5];
-#endif
 
 // - internal variables
 int currentSecHexAngle;
@@ -138,6 +217,7 @@ int currentMinHexAngle;
 int currentHourHexAngle;
 int dateValid;
 int minuteValid;
+int dayColorIndex;
 
 // global path info temp var
 GPathInfo pathInfo;
@@ -179,21 +259,21 @@ void hour_minute_layer_callback(struct Layer *layer, GContext *ctx)
 {
   // minute
   gpath_rotate_to(minutePentagon, currentMinHexAngle);
-  graphics_context_set_fill_color(ctx, MINUTE_P_COLOR);
+  graphics_context_set_fill_color(ctx, COLOR(dayColorIndex, minute_p_color));
   gpath_draw_filled(ctx, minutePentagon);
   gpath_rotate_to(minuteTriangle, currentMinHexAngle);
-  graphics_context_set_fill_color(ctx, MINUTE_T_COLOR);
+  graphics_context_set_fill_color(ctx, COLOR(dayColorIndex, minute_t_color));
   gpath_draw_filled(ctx, minuteTriangle);
   // hour
   gpath_rotate_to(hourPentagon, currentHourHexAngle);
   gpath_rotate_to(hourTriangle, currentHourHexAngle);
-  graphics_context_set_fill_color(ctx, HOUR_P_COLOR);
+  graphics_context_set_fill_color(ctx, COLOR(dayColorIndex, hour_p_color));
   gpath_draw_filled(ctx, hourPentagon);
-  graphics_context_set_fill_color(ctx, HOUR_T_COLOR);
+  graphics_context_set_fill_color(ctx, COLOR(dayColorIndex, hour_t_color));
   gpath_draw_filled(ctx, hourTriangle);
   #ifndef PBL_COLOR
   // - b&w: need outline of hour pentagon in minute pentagon color to visually separate from minute triangle
-  graphics_context_set_stroke_color(ctx, MINUTE_P_COLOR);
+  graphics_context_set_stroke_color(ctx, COLOR(dayColorIndex, minute_p_color));
   gpath_draw_outline(ctx, hourPentagon);
   #endif
 }
@@ -202,11 +282,11 @@ void second_layer_callback(struct Layer *layer, GContext *ctx)
 {
   // second
   gpath_rotate_to(secondPentagon, currentSecHexAngle);
-  graphics_context_set_fill_color(ctx, SECOND_P_COLOR);
+  graphics_context_set_fill_color(ctx, COLOR(dayColorIndex, second_p_color));
   gpath_draw_filled(ctx, secondPentagon);
   #ifndef PBL_COLOR
   // - b&w: need outline of second pentagon in hour pentagon color to visually separate from hour triangle
-  graphics_context_set_stroke_color(ctx, HOUR_P_COLOR);
+  graphics_context_set_stroke_color(ctx, COLOR(dayColorIndex, hour_p_color));
   gpath_draw_outline(ctx, secondPentagon);
   #endif
 }
@@ -222,6 +302,26 @@ void update_second_angle(struct tm *tick_time)
 {
   currentSecHexAngle = TRIG_MAX_ANGLE / 60 * tick_time->tm_sec;
 }
+
+
+void setDayColors()
+{
+  // main day color (background)
+  window_set_background_color(window, COLOR(dayColorIndex, main_color));
+  text_layer_set_background_color(dwday_textlayer, COLOR(dayColorIndex, main_color));
+  text_layer_set_background_color(ddate_textlayer, COLOR(dayColorIndex, main_color));
+  text_layer_set_background_color(dwday_textlayer, COLOR(dayColorIndex, main_color));
+  // weekday text
+  text_layer_set_text_color(dwday_textlayer, COLOR(dayColorIndex, dwday_text_color));
+  // ddate text
+  text_layer_set_text_color(ddate_textlayer, COLOR(dayColorIndex, ddate_text_color));
+  // Seconds pentagon
+  text_layer_set_background_color(yold_textlayer, COLOR(dayColorIndex, second_p_color)); // yold background
+  // YOLD text
+  text_layer_set_text_color(yold_textlayer, COLOR(dayColorIndex, second_text_color));
+
+}
+
 
 
 // set this to 1 to quickly see all minute texts, one per second, to debug layout
@@ -262,23 +362,14 @@ void handle_second_tick(struct tm *tick_time, TimeUnits units_changed)
       // yes, weekday and date are both St. Tib's
       strcpy(dwday_str_buffer, sttibsdayText);
       strcpy(ddate_str_buffer, sttibsdayText);
-      #ifdef PBL_COLOR
-      window_set_background_color(window, STTIBSDAY_BG_COLOR);
-      text_layer_set_background_color(dwday_textlayer, STTIBSDAY_BG_COLOR);
-      text_layer_set_background_color(ddate_textlayer, STTIBSDAY_BG_COLOR);
-      #endif
+      dayColorIndex = 6; // special for St.Tib's
     }
     else {
       // regular day
       // - weekday
       int dwday = yearday % 5;
+      dayColorIndex = dwday;
       strcpy(dwday_str_buffer, dweekdayTexts[dwday]);
-      // - weekday color
-      #ifdef PBL_COLOR
-      window_set_background_color(window, dweekdayColors[dwday]);
-      text_layer_set_background_color(dwday_textlayer, dweekdayColors[dwday]);
-      text_layer_set_background_color(ddate_textlayer, dweekdayColors[dwday]);
-      #endif
       // - date
       int season = yearday / 73;
       int daynum = yearday % 73 + 1;
@@ -302,6 +393,9 @@ void handle_second_tick(struct tm *tick_time, TimeUnits units_changed)
         snprintf(ddate_str_buffer+i, DDATE_STR_BUFFER_BYTES-i," %d", daynum);
       }
     }
+    // adjust day-dependent colors
+    setDayColors();
+    // draw text
     text_layer_set_text(dwday_textlayer, dwday_str_buffer);
     text_layer_set_text(ddate_textlayer, ddate_str_buffer);
     // YOLD
@@ -328,18 +422,12 @@ void handle_second_tick(struct tm *tick_time, TimeUnits units_changed)
 
 void init()
 {
-  #ifdef PBL_COLOR
-  // the weekday colors
-  dweekdayColors[0] = SWEETMORN_BG_COLOR;
-  dweekdayColors[1] = BOOMTIME_BG_COLOR;
-  dweekdayColors[2] = PUNGENDAY_BG_COLOR;
-  dweekdayColors[3] = PRICKLEPRICKLE_BG_COLOR;
-  dweekdayColors[4] = SETTINGORANGE_BG_COLOR;
-  #endif
+  // color
+  dayColorIndex = 0;
 
   // the window
   window = window_create();
-  window_set_background_color(window, DEFAULT_BG_COLOR);
+  window_set_background_color(window, COLOR(0,main_color)); // use first day's as default
   window_stack_push(window, true /* Animated */);
 
   // init the engine
@@ -360,18 +448,15 @@ void init()
   tf.size.h = WEEKDAY_HEIGHT;
   dwday_textlayer = text_layer_create(tf);
   text_layer_set_text_alignment(dwday_textlayer, GTextAlignmentCenter); // centered
-  text_layer_set_background_color(dwday_textlayer, DEFAULT_BG_COLOR); // like background
   text_layer_set_font(dwday_textlayer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD)); // font
-  text_layer_set_text_color(dwday_textlayer, DWDAY_TEXT_COLOR); // text
   // the text layer for displaying the date (bottom border)
   tf = wf; // start calculation with window frame
   tf.origin.y += tf.size.h - DATE_HEIGHT - DATE_BOTTOM_MARGIN;
   tf.size.h = DATE_HEIGHT;
   ddate_textlayer = text_layer_create(tf);
   text_layer_set_text_alignment(ddate_textlayer, GTextAlignmentCenter); // centered
-  text_layer_set_background_color(ddate_textlayer, DEFAULT_BG_COLOR); // like background
+  text_layer_set_background_color(ddate_textlayer, COLOR(0,main_color)); // like background
   text_layer_set_font(ddate_textlayer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD)); // font
-  text_layer_set_text_color(ddate_textlayer, DDATE_TEXT_COLOR); // text
   // the text layer for displaying the YOLD (center)
   tf = wf; // start calculation with window frame
   tf.origin.x += (tf.size.w-YOLD_WIDTH)/2;
@@ -380,9 +465,7 @@ void init()
   tf.size.h = YOLD_HEIGHT;
   yold_textlayer = text_layer_create(tf);
   text_layer_set_text_alignment(yold_textlayer, GTextAlignmentCenter); // centered
-  text_layer_set_background_color(yold_textlayer, SECOND_P_COLOR); // like second pentagon
   text_layer_set_font(yold_textlayer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD)); // font
-  text_layer_set_text_color(yold_textlayer, SECOND_TEXT_COLOR); // black text
   // init text contents
   text_layer_set_text(dwday_textlayer, "dclock");
   text_layer_set_text(yold_textlayer, "");
